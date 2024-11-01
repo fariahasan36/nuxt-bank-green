@@ -11,12 +11,18 @@
         class="relative col-span-2 md:col-span-1 md:row-span-2 flex flex-row justify-center md:justify-start md:mt-8"
       >
         <div class="flex flex-col items-center justify-start w-full">
-          <BankCircle class="max-w-sm" :rating="'ok'" />
+          <BankCircle
+            class="max-w-sm"
+            :rating="'ok'"
+          />
           <SocialSharer
             class="text-sushi-500"
             :hashtags="['climatecrisis', 'fossilbanks']"
           />
-          <NuxtLink class="underline hover:text-sushi-500 mt-6" to="/methodology">
+          <NuxtLink
+            class="underline hover:text-sushi-500 mt-6"
+            to="/methodology"
+          >
             {{ bankPage?.data.link_copy_methodology_page }}
           </NuxtLink>
         </div>
@@ -29,7 +35,10 @@
           <PrismicRichText :field="bankPage?.data.headline" />
         </div>
         <div class="prose sm:prose-lg xl:prose-xl prose-blurb">
-          <PrismicRichText :field="bankPage?.data.description1" />
+          <PrismicRichText
+            :field="bankPage?.data.description1"
+            class="customStyle"
+          />
         </div>
       </div>
     </template>
@@ -74,17 +83,24 @@
 </template>
 
 <script setup lang="ts">
-import { PrismicDocument } from '@prismicio/types'
+import type { PrismicDocument } from '@prismicio/types'
 import ArrowDownBounce from '@/components/icons/ArrowDownBounce.vue'
 import isEmptyPrismicField from '~/utils/prismic/isEmptyPrismicField'
 
 defineProps<{
-  name: string;
-  website: string;
+  name: string
+  website: string
   inheritBrandRating: {
-    tag: string;
-    name: string;
-  };
-  bankPage: PrismicDocument<Record<string, any>, string, string> | null;
+    tag: string
+    name: string
+  }
+  bankPage: PrismicDocument<Record<string, any>, string, string> | null
 }>()
 </script>
+
+<style>
+/* Manually set style because prose cause anchor tag to be small */
+.customStyle p a {
+  font-size: 20px;
+}
+</style>
